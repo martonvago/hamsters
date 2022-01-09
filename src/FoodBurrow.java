@@ -4,7 +4,7 @@
  * implement HamsterBurrow must necessarily have HamsterFood, so it makes sense
  * to have a separate interface HamsterBurrow in addition to FoodBurrow.)
  *  
- * @author 
+ * @author Marton Vago
  */
 public abstract class FoodBurrow implements HamsterBurrow {
 
@@ -25,7 +25,19 @@ public abstract class FoodBurrow implements HamsterBurrow {
         this.food = food;
     }
 
+    @Override
+    public int totalFoodUnits() {
+        return this.food.getFoodUnits();
+    }
 
+    @Override
+    public int feedHungryHamster(Hamster h) {
+        if (h == null || !h.isHungry()) {
+            throw new IllegalArgumentException("Illegal argument: hamster is null or not hungry");
+        }
+
+        return h.eat(this.food);
+    }
 
     @Override
     public String toString() {
