@@ -3,6 +3,7 @@
  * into any further HamsterBurrows.
  *
  * @author Carsten Fuhs
+ * @author Marton Vago
  */
 public class DeadEnd extends FoodBurrow {
 
@@ -15,7 +16,10 @@ public class DeadEnd extends FoodBurrow {
         super(food);
     }
 
-
+    @Override
+    public int size() {
+        return 1;
+    }
 
     @Override
     public String toString() {
