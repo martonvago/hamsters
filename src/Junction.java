@@ -2,7 +2,7 @@
  * A Junction is a HamsterBurrow that stores food and that branches into
  * two further HamsterBurrows.
  *
- * @author 
+ * @author Marton Vago
  */
 public class Junction extends FoodBurrow {
 
@@ -34,7 +34,33 @@ public class Junction extends FoodBurrow {
         this.rightBurrow = rightBurrow;
     }
 
+    @Override
+    public int size() {
+        return this.leftBurrow.size() + 1 + this.rightBurrow.size();
+    }
 
+    @Override
+    public int totalFoodUnits() {
+        return this.leftBurrow.totalFoodUnits()
+                + super.totalFoodUnits()
+                + this.rightBurrow.totalFoodUnits();
+    }
+
+    @Override
+    public int feedHungryHamster(Hamster h) {
+        int eaten = this.leftBurrow.feedHungryHamster(h);
+        if (!h.isHungry()) {
+            return eaten;
+        }
+
+        eaten += super.feedHungryHamster(h);
+        if (!h.isHungry()) {
+            return eaten;
+        }
+
+        eaten += this.rightBurrow.feedHungryHamster(h);
+        return eaten;
+    }
 
     @Override
     public String toString() {
